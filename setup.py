@@ -33,13 +33,10 @@ setup(
       classifiers=[
             "Development Status :: 4 - Beta",
             "Intended Audience :: Developers",
-            "Programming Language :: Python :: 2",
-            "Programming Language :: Python :: 2.4",
-            "Programming Language :: Python :: 2.6",
-            "Programming Language :: Python :: 2.7",
             "Programming Language :: Python :: 3",
             "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
       ],
+      python_requires=">=3.6",
       install_requires=get_requirements(),
       entry_points={
             "console_scripts": [

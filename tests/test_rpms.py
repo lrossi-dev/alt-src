@@ -9,7 +9,6 @@ from multiprocessing import Process
 from subprocess import PIPE, Popen, check_call, check_output
 import pytest
 import yaml
-import six
 from configparser import RawConfigParser
 from hamcrest import assert_that, calling, empty, equal_to, not_, raises
 from mock import MagicMock, call, patch
@@ -527,7 +526,7 @@ def test_get_state_with_error_other_than_enoent(tempdir):
     processor = BaseProcessor(options)
     processor.workdir = tempdir
     # attempting to open state file raises generic IOError
-    with patch('six.moves.builtins.open', autospec=True, side_effect=IOError):
+    with patch('builtins.open', autospec=True, side_effect=IOError):
         # error is raised by method because only ENOENT is handled
         assert_that(calling(processor.get_state), raises(IOError))
 

@@ -16,11 +16,14 @@ import os.path
 import re
 import shutil
 import simplejson as json
-import six
-from six.moves import configparser, shlex_quote
-from six.moves import cStringIO as StringIO
-from six.moves.urllib.parse import urlencode
-from six.moves.urllib.request import Request, urlopen
+import configparser
+
+
+from shlex import quote
+
+from io import StringIO
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
 import smtplib
 import subprocess
 import sys
@@ -1347,7 +1350,7 @@ failed to apply.
                     if re.match(matching_path[0], str(key)):
                         stack.append((val, current_data, key, matching_path[1:]))
 
-            if isinstance(current_data, six.string_types):
+            if isinstance(current_data, str):
                 replaced = re.sub(matching_path[0],
                                   data['replace'],
                                   current_data)
@@ -2060,7 +2063,7 @@ def explode_srpm_cpio(srpm, header, destdir=None, logfile=None):
         'set -o pipefail; '
         'rpm2cpio %s | '
         'cpio --extract --make-directories --preserve-modification-time --unconditional'
-    ) % shlex_quote(os.path.abspath(srpm))
+    ) % quote(os.path.abspath(srpm))
 
     # Note: /bin/sh is not guaranteed to understand "pipefail", hence explicit
     # usage of bash
